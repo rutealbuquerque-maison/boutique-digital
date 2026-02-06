@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maison Rute Albuquerque | Boutique Digital</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --emerald: #022c22;
+            --gold-champagne: #d4af37;
+            --off-white: #fcfcfc;
+            --soft-gray: #717171;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--off-white);
+            color: var(--emerald);
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(2, 44, 34, 0.8), rgba(2, 44, 34, 0.8)), url('https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&q=80&w=2000') no-repeat center center/cover;
+            color: var(--off-white);
+            padding: 20px;
+        }
+
+        .logo-container h1 {
+            font-family: 'Cormorant+Garamond', serif;
+            font-size: 3.5rem;
+            letter-spacing: 0.2rem;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+        }
+
+        .logo-container p {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5rem;
+            opacity: 0.8;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.6;
+        }
+
+        section {
+            padding: 100px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 50px;
+            font-weight: 300;
+        }
+
+        .story-block {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .story-img {
+            width: 100%;
+            height: 500px;
+            background: url('https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?auto=format&fit=crop&q=80&w=1000') center center/cover;
+            border: 1px solid var(--gold-champagne);
+            padding: 15px;
+            background-clip: content-box;
+        }
+
+        .story-text h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--emerald);
+        }
+
+        .story-text p {
+            font-weight: 300;
+            color: var(--soft-gray);
+            margin-bottom: 20px;
+        }
+
+        .drop-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .drop-item {
+            border: 1px solid #eee;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .drop-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold-champagne);
+        }
+
+        .drop-item .status {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--gold-champagne);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .drop-item h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--emerald);
+            color: white;
+            padding: 15px 40px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 20px;
+            border: 1px solid var(--emerald);
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: transparent;
+            color: var(--emerald);
+        }
+
+        footer {
+            background-color: var(--emerald);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .story-block {
+                grid-template-columns: 1fr;
+            }
+            .logo-container h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <p>Maison</p>
+            <h1>Rute Albuquerque</h1>
+            <p>Grife Artesanal</p>
+        </div>
+        <div class="scroll-indicator">Explore o Atelier</div>
+    </header>
+
+    <section id="story">
+        <div class="story-block">
+            <div class="story-img"></div>
+            <div class="story-text">
+                <h2>O Luxo da Paciência</h2>
+                <p>Na Maison Rute Albuquerque, o tempo não é nosso inimigo, mas o nosso material mais precioso. Cada peça é tecida à mão, ponto a ponto, em um processo que honra a tradição milenar do fazer artesanal.</p>
+                <p>Nossas bolsas não são produzidas em série. Elas são gestadas. Dezoito, vinte, trinta horas de dedicação exclusiva para que uma única bolsa ganhe vida.</p>
+                <a href="#drop" class="cta-button">Ver Lançamentos</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="drop" style="background-color: #f4f4f4;">
+        <h2 class="section-title">Drop de Fevereiro</h2>
+        <p style="text-align: center; color: var(--soft-gray); font-weight: 300; max-width: 600px; margin: -30px auto 50px;">Apenas 04 peças exclusivas são produzidas por ciclo. Garanta sua reserva para o próximo lançamento.</p>
+        
+        <div class="drop-grid">
+            <div class="drop-item">
+                <span class="status">Reservada</span>
+                <h3>Bolsa Esmeralda RA</h3>
+                <p style="font-size: 0.8rem; color: #aaa;">01 de 04</p>
+            </div>
+            <div class="drop-item" style="opacity: 0.6;">
+                <span class="status" style="color: #999;">Em Tecedura</span>
+                <h3>Bolsa Champagne</h3>
+                <p style="font-size: 0.8rem; color: #aaa;">02 de 04</p>
+            </div>
+            <div class="drop-item">
+                <span class="status">Disponível</span>
+                <h3>Clutch Noite</h3>
+                <p style="font-size: 0.8rem; color: #aaa;">03 de 04</p>
+            </div>
+            <div class="drop-item">
+                <span class="status">Disponível</span>
+                <h3>Shopping Bag Wood</h3>
+                <p style="font-size: 0.8rem; color: #aaa;">04 de 04</p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 60px;">
+            <a href="https://wa.me/5511987881721" target="_blank" class="cta-button">Falar com a Artesã</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-logo">RA</div>
+        <p style="font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0.6;">Maison Rute Albuquerque</p>
+        <p style="margin-top: 20px; font-size: 0.8rem; opacity: 0.4;">&copy; 2026. Todos os direitos reservados.</p>
+    </footer>
+
+</body>
+</html>
