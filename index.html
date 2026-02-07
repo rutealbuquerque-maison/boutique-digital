@@ -2,286 +2,567 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maison Rute Albuquerque | Boutique Digital</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Maison Rute Albuquerque | Vertical Atelier</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
             --emerald: #022c22;
-            --gold-champagne: #d4af37;
+            --emerald-dark: #011a14;
+            --gold-champagne: #C5A059;
             --off-white: #fcfcfc;
             --soft-gray: #717171;
+            --overlay-dark: rgba(2, 44, 34, 0.85);
+            --overlay-light: rgba(255, 255, 255, 0.95);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            scrollbar-width: none; /* Firefox */
+        }
+        
+        *::-webkit-scrollbar {
+            display: none; /* Chrome/Safari */
         }
 
         body {
             background-color: var(--off-white);
             color: var(--emerald);
             font-family: 'Montserrat', sans-serif;
-            line-height: 1.6;
-            overflow-x: hidden;
+            overflow: hidden; /* Prevent default scroll */
+            height: 100vh;
+            width: 100%;
         }
 
-        header {
+        /* Scroll Snap Container */
+        .snap-container {
             height: 100vh;
+            width: 100%;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+        }
+
+        section {
+            height: 100vh;
+            width: 100%;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+            position: relative;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            text-align: center;
-            background: linear-gradient(rgba(2, 44, 34, 0.7), rgba(2, 44, 34, 0.7)), url('assets/hero-bag.jpg') no-repeat center center/cover;
-            color: var(--off-white);
-            padding: 20px;
+            overflow: hidden;
         }
 
-        .logo-container {
-            margin-bottom: 1rem;
-        }
-
-        .main-logo {
-            max-width: 280px;
-            height: auto;
-            filter: drop-shadow(0 0 10px rgba(0,0,0,0.3));
-        }
-
-        /* Fallback if logo fails to load or for SEO text hidden visually if needed */
-        .logo-text h1 {
+        /* Typography */
+        h1, h2, h3 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 3.5rem;
-            letter-spacing: 0.2rem;
+            font-weight: 400;
+        }
+
+        p {
             font-weight: 300;
-            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border: 1px solid var(--gold-champagne);
+            color: var(--gold-champagne);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            background: transparent;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: var(--gold-champagne);
+            color: var(--emerald);
+        }
+
+        /* Slide 1: Hero */
+        #hero {
+            background: linear-gradient(var(--overlay-dark), var(--overlay-dark)), url('assets/hero-bag.jpg') center/cover no-repeat;
+            color: var(--off-white);
+            text-align: center;
+        }
+
+        .hero-logo {
+            max-width: 80%;
+            width: 300px;
+            filter: drop-shadow(0 0 20px rgba(197, 160, 89, 0.2));
+            margin-bottom: 2rem;
+            animation: fadeInUp 1.2s ease-out;
         }
 
         .scroll-indicator {
             position: absolute;
-            bottom: 30px;
-            font-size: 0.7rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            opacity: 0.6;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-            40% {transform: translateY(-10px);}
-            60% {transform: translateY(-5px);}
-        }
-
-        section {
-            padding: 100px 20px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 50px;
-            font-weight: 300;
-        }
-
-        .story-block {
-            display: grid;
-            grid-template-columns: 1fr 1.2fr;
-            gap: 60px;
+            bottom: 40px;
+            display: flex;
+            flex-direction: column;
             align-items: center;
+            opacity: 0.7;
+            animation: pulse 2s infinite;
         }
 
-        .story-img {
-            width: 100%;
-            height: 500px;
-            background: url('assets/story-bag.jpg') center center/cover;
-            border: 1px solid var(--gold-champagne);
-            padding: 15px;
-            background-clip: content-box;
-            box-shadow: 10px 10px 30px rgba(0,0,0,0.1);
+        .scroll-text {
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            color: var(--gold-champagne);
         }
 
-        .story-text h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2rem;
-            margin-bottom: 20px;
+        .scroll-arrow {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--gold-champagne), transparent);
+        }
+
+        /* Slide 2: Manifesto */
+        #manifesto {
+            background-color: var(--off-white);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .manifesto-img {
+            height: 100%;
+            background: url('assets/story-bag.jpg') center/cover no-repeat;
+            position: relative;
+        }
+
+        .manifesto-img::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, rgba(0,0,0,0), rgba(252,252,252,1)); 
+            /* Fade to white on right edge for desktop */
+        }
+
+        .manifesto-content {
+            padding: 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-width: 600px;
+        }
+
+        .manifesto-content h2 {
+            font-size: 3rem;
+            color: var(--emerald);
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .manifesto-content p {
+            color: var(--soft-gray);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            text-align: justify;
+        }
+
+        /* Slide 3: Drop */
+        #drop {
+            background-color: #f4f4f4; /* Subtle contrast */
+            padding: 0;
+            /* Allow internal scrolling if content overflows */
+            align-items: stretch; 
+        }
+
+        .drop-header {
+            text-align: center;
+            padding: 2rem 1rem 1rem;
+            flex-shrink: 0;
+        }
+
+        .drop-header h2 {
+            font-size: 2.5rem;
             color: var(--emerald);
         }
 
-        .story-text p {
-            font-weight: 300;
-            color: var(--soft-gray);
-            margin-bottom: 20px;
-            text-align: justify;
+        .drop-scroll-wrapper {
+            flex-grow: 1;
+            overflow-y: auto; /* Allow vertical scroll within this section */
+            padding: 1rem 2rem 4rem;
+            display: flex;
+            justify-content: center;
         }
 
         .drop-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
+            grid-template-columns: repeat(4, 1fr); /* 4 columns on large screens */
+            gap: 20px;
+            max-width: 1400px;
+            width: 100%;
         }
 
         .drop-item {
-            border: 1px solid #eee;
-            padding: 20px;
-            text-align: center;
-            transition: all 0.3s ease;
             background: white;
+            padding: 20px;
+            border: 1px solid transparent;
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            height: fit-content;
         }
 
         .drop-item:hover {
-            transform: translateY(-5px);
             border-color: var(--gold-champagne);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
 
         .drop-item img {
             width: 100%;
-            height: 250px;
-            object-fit: cover;
+            aspect-ratio: 1;
+            object-fit: contain;
             margin-bottom: 15px;
-            border-bottom: 1px solid #f0f0f0;
-        }
-
-        .drop-item .status {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--gold-champagne);
-            margin-bottom: 10px;
-            display: block;
-            font-weight: 600;
+            background: #fafafa;
         }
 
         .drop-item h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             margin-bottom: 5px;
             color: var(--emerald);
         }
 
-        .cta-button {
-            display: inline-block;
-            background-color: var(--emerald);
-            color: white;
-            padding: 15px 40px;
-            text-decoration: none;
-            font-size: 0.8rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-top: 20px;
-            border: 1px solid var(--emerald);
-            transition: all 0.3s ease;
-        }
-
-        .cta-button:hover {
-            background-color: transparent;
-            color: var(--emerald);
-        }
-
-        footer {
-            background-color: var(--emerald);
-            color: white;
-            padding: 60px 20px;
+        .reserve-link {
+            display: block;
+            margin-top: 15px;
             text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            padding: 10px;
+            background: var(--emerald);
+            color: var(--gold-champagne);
+            text-decoration: none;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
         }
 
-        .footer-logo img {
-            height: 80px;
-            width: auto;
-            margin-bottom: 20px;
-            filter: brightness(0) invert(1); /* Ensure white logo if transparent is dark */
+        .reserve-link:hover {
+            background: var(--emerald-dark);
         }
 
-        /* If logo is already white, remove filter */
-        
+        /* Slide 4: Attendance / Footer */
+        #attendance {
+            background: var(--emerald);
+            color: var(--off-white);
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .footer-logo {
+            width: 150px;
+            margin-bottom: 2rem;
+            filter: brightness(0) invert(1);
+        }
+
+        .whatsapp-cta {
+            background: transparent;
+            border: 1px solid var(--gold-champagne);
+            color: var(--gold-champagne);
+            padding: 15px 40px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin-bottom: 3rem;
+            display: inline-block;
+        }
+
+        .whatsapp-cta:hover {
+            background: var(--gold-champagne);
+            color: var(--emerald);
+            box-shadow: 0 0 20px rgba(197, 160, 89, 0.4);
+        }
+
+        footer p {
+            font-size: 0.7rem;
+            opacity: 0.5;
+            letter-spacing: 1px;
+        }
+
+        /* Customization Styles (Injected by Script) */
+        .custom-options {
+            margin-top: 15px;
+            border-top: 1px solid #eee;
+            padding-top: 10px;
+        }
+        .option-group { margin-bottom: 10px; }
+        .option-label {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            color: #999;
+            display: block;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+        .color-options { display: flex; gap: 8px; }
+        .color-btn {
+            width: 20px; height: 20px; border-radius: 50%; border: 1px solid #ddd; cursor: pointer;
+        }
+        .color-btn.active { transform: scale(1.2); border: 2px solid var(--gold-champagne); }
+        .text-options { display: flex; flex-wrap: wrap; gap: 5px; }
+        .text-btn {
+            font-size: 0.65rem; padding: 4px 10px; border: 1px solid #eee; background: none; cursor: pointer; border-radius: 15px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .text-btn.active { background: var(--emerald); color: var(--gold-champagne); border-color: var(--emerald); }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .drop-grid {
+                grid-template-columns: repeat(2, 1fr); /* 2x2 tablet */
+            }
+        }
+
         @media (max-width: 768px) {
-            .story-block {
-                grid-template-columns: 1fr;
+            /* Mobile Manifesto */
+            #manifesto {
+                display: flex;
+                flex-direction: column;
+                background: url('assets/story-bag.jpg') center/cover no-repeat; /* Background image for mobile */
+                position: relative;
             }
-            .story-img {
-                height: 300px;
+            #manifesto::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background: rgba(255, 255, 255, 0.9); /* Strong overlay */
             }
-            .main-logo {
-                max-width: 200px;
+            .manifesto-content {
+                position: relative;
+                z-index: 1;
+                padding: 2rem;
+                text-align: center;
             }
+            .manifesto-img { display: none; } /* Hide the separate div */
+            .manifesto-content h2 { font-size: 2.2rem; }
+
+            /* Mobile Drop - Horizontal Scroll within Section */
+            .drop-scroll-wrapper {
+                justify-content: flex-start; /* Align left for scroll */
+                padding: 1rem;
+                overflow-x: auto; /* Horizontal scroll if we want carousel, or just vertical grid? */
+                /* Let's keep vertical grid for mobile but it scrolls within the section */
+            }
+            .drop-grid {
+                grid-template-columns: 1fr; /* Single column */
+                gap: 30px;
+                padding-bottom: 50px; /* Space for scroll */
+            }
+            
+            /* Adjustments */
+            .hero-logo { width: 220px; }
+            .section-title { font-size: 2rem; }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo-container">
-            <img src="assets/logo-main.png" alt="Maison Rute Albuquerque" class="main-logo">
-        </div>
-        <div class="scroll-indicator">Explore o Atelier</div>
-    </header>
+    <div class="snap-container">
+        
+        <!-- Slide 1: Hero -->
+        <section id="hero">
+            <img src="assets/logo-main.png" alt="Maison Rute Albuquerque" class="hero-logo">
+            <div class="scroll-indicator">
+                <span class="scroll-text">Explore o Atelier</span>
+                <div class="scroll-arrow"></div>
+            </div>
+        </section>
 
-    <section id="story">
-        <div class="story-block">
-            <div class="story-img"></div>
-            <div class="story-text">
+        <!-- Slide 2: Manifesto -->
+        <section id="manifesto">
+            <div class="manifesto-img"></div>
+            <div class="manifesto-content">
                 <h2>O Luxo da Paciência</h2>
                 <p>Na Maison Rute Albuquerque, o tempo não é nosso inimigo, mas o nosso material mais precioso. Cada peça é tecida à mão, ponto a ponto, em um processo que honra a tradição milenar do fazer artesanal.</p>
-                <p>Nossas bolsas não são produzidas em série. Elas são gestadas. Dezoito, vinte, trinta horas de dedicação exclusiva para que uma única bolsa ganhe vida. O resultado é uma obra de arte vestível, carregada de história e significado.</p>
-                <a href="#drop" class="cta-button">Ver Lançamentos</a>
+                <p>Nossas bolsas não são produzidas em série. Elas são gestadas. O resultado é uma obra de arte vestível, carregada de história e significado.</p>
+                <a href="#drop" class="btn" style="color: var(--emerald); border-color: var(--emerald); align-self: flex-start;">Ver Obras</a>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="drop" style="background-color: #f4f4f4;">
-        <h2 class="section-title">Drop de Fevereiro</h2>
-        <p style="text-align: center; color: var(--soft-gray); font-weight: 300; max-width: 600px; margin: -30px auto 50px;">Apenas 04 peças exclusivas são produzidas por ciclo. Garanta sua reserva para o próximo lançamento.</p>
-        
-        <div class="drop-grid">
-            <div class="drop-item">
-                <span class="status">Disponível</span>
-                <img src="assets/atena.png" alt="Bolsa Atena">
-                <h3>Bolsa Atena</h3>
-                <p style="font-size: 0.8rem; color: #aaa;">01 de 04</p>
+        <!-- Slide 3: Drop -->
+        <section id="drop">
+            <div class="drop-header">
+                <h2>O Drop</h2>
+                <p style="font-size: 0.8rem; letter-spacing: 1px; color: #999; margin-top: 5px;">Edição Limitada de Fevereiro</p>
             </div>
-            <div class="drop-item">
-                <span class="status">Disponível</span>
-                <img src="assets/afrodite.png" alt="Bolsa Afrodite">
-                <h3>Bolsa Afrodite</h3>
-                <p style="font-size: 0.8rem; color: #aaa;">02 de 04</p>
+            <div class="drop-scroll-wrapper">
+                <div class="drop-grid">
+                    <!-- Bolsa 1 -->
+                    <div class="drop-item">
+                        <img src="assets/atena.png" alt="Bolsa Atena">
+                        <h3>Atena</h3>
+                        <p style="font-size: 0.7rem; color: #aaa; margin-bottom: 10px;">PEÇA ÚNICA 01/04</p>
+                        <!-- Script will inject options here -->
+                        <a href="https://wa.me/5511957688000" class="reserve-link" target="_blank">Reservar</a>
+                    </div>
+                    <!-- Bolsa 2 -->
+                    <div class="drop-item">
+                        <img src="assets/afrodite.png" alt="Bolsa Afrodite">
+                        <h3>Afrodite</h3>
+                        <p style="font-size: 0.7rem; color: #aaa; margin-bottom: 10px;">PEÇA ÚNICA 02/04</p>
+                        <a href="https://wa.me/5511957688000" class="reserve-link" target="_blank">Reservar</a>
+                    </div>
+                    <!-- Bolsa 3 -->
+                    <div class="drop-item">
+                        <img src="assets/bali.png" alt="Bolsa Bali">
+                        <h3>Bali</h3>
+                        <p style="font-size: 0.7rem; color: #aaa; margin-bottom: 10px;">PEÇA ÚNICA 03/04</p>
+                        <a href="https://wa.me/5511957688000" class="reserve-link" target="_blank">Reservar</a>
+                    </div>
+                    <!-- Bolsa 4 -->
+                    <div class="drop-item">
+                        <img src="assets/elegance.png" alt="Bolsa Elegance">
+                        <h3>Elegance</h3>
+                        <p style="font-size: 0.7rem; color: #aaa; margin-bottom: 10px;">PEÇA ÚNICA 04/04</p>
+                        <a href="https://wa.me/5511957688000" class="reserve-link" target="_blank">Reservar</a>
+                    </div>
+                </div>
             </div>
-            <div class="drop-item">
-                <span class="status">Disponível</span>
-                <img src="assets/bali.png" alt="Bolsa Bali">
-                <h3>Bolsa Bali</h3>
-                <p style="font-size: 0.8rem; color: #aaa;">03 de 04</p>
-            </div>
-            <div class="drop-item">
-                <span class="status">Disponível</span>
-                <img src="assets/elegance.png" alt="Bolsa Elegance">
-                <h3>Bolsa Elegance</h3>
-                <p style="font-size: 0.8rem; color: #aaa;">04 de 04</p>
-            </div>
-        </div>
+        </section>
 
-        <div style="text-align: center; margin-top: 60px;">
-            <a href="https://wa.me/5511957688000" target="_blank" class="cta-button">Falar com a Artesã</a>
-        </div>
-    </section>
+        <!-- Slide 4: Attendance -->
+        <section id="attendance">
+            <img src="assets/logo-transp.png" alt="Logo" class="footer-logo">
+            <h2 style="font-size: 2rem; margin-bottom: 1rem;">Atelier Digital</h2>
+            <p style="max-width: 500px; margin: 0 auto 3rem; opacity: 0.8;">Nosso atendimento é tão personalizado quanto nossas peças. Fale diretamente com a artesã para dúvidas e encomendas especiais.</p>
+            
+            <a href="https://wa.me/5511957688000" class="whatsapp-cta" target="_blank">Falar no WhatsApp</a>
+            
+            <footer>
+                <p>&copy; 2026 MAISON RUTE ALBUQUERQUE. TODOS OS DIREITOS RESERVADOS.</p>
+            </footer>
+        </section>
 
-    <footer>
-        <div class="footer-logo">
-            <img src="assets/logo-transp.png" alt="Maison Rute Albuquerque">
-        </div>
-        <p style="font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0.6;">Maison Rute Albuquerque</p>
-        <p style="margin-top: 20px; font-size: 0.8rem; opacity: 0.4;">&copy; 2026. Todos os direitos reservados.</p>
-    </footer>
+    </div>
 
+    <!-- WhatsApp Customization Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const config = {
+                colors: [
+                    { name: 'Esmeralda', hex: '#022c22' },
+                    { name: 'Preto', hex: '#1a1a1a' },
+                    { name: 'Off-White', hex: '#fcfcfc' },
+                    { name: 'Marsala', hex: '#955251' }
+                ],
+                alca: ['Corrente Ouro', 'Resina', 'Couro'],
+                fecho: ['Magnético', 'Torniquete', 'Zíper'],
+                base: ['Total Crochê', 'Base em Couro']
+            };
+
+            const items = document.querySelectorAll('.drop-item');
+
+            items.forEach(item => {
+                const bagNameElement = item.querySelector('h3');
+                if (!bagNameElement) return;
+                
+                const bagName = bagNameElement.innerText;
+                const link = item.querySelector('.reserve-link');
+                
+                // Create container
+                const container = document.createElement('div');
+                container.className = 'custom-options';
+                
+                // State for this bag (defaults)
+                const state = {
+                    cor: config.colors[0].name,
+                    alca: config.alca[0],
+                    fecho: config.fecho[0],
+                    base: config.base[0]
+                };
+
+                // Helper to update link
+                const updateLink = () => {
+                    // Clean text for WhatsApp
+                    const text = `Olá! Gostaria de reservar a *${bagName}* na cor *${state.cor}*, com alça de *${state.alca}*, fecho *${state.fecho}* e *${state.base}*.`;
+                    const encoded = encodeURIComponent(text);
+                    link.href = `https://wa.me/5511957688000?text=${encoded}`;
+                };
+
+                // 1. Color Options
+                const colorGroup = document.createElement('div');
+                colorGroup.className = 'option-group';
+                colorGroup.innerHTML = '<span class="option-label">Cor</span>';
+                const colorContainer = document.createElement('div');
+                colorContainer.className = 'color-options';
+                
+                config.colors.forEach((c, index) => {
+                    const btn = document.createElement('button');
+                    btn.className = `color-btn ${index === 0 ? 'active' : ''}`;
+                    btn.style.backgroundColor = c.hex;
+                    btn.title = c.name;
+                    btn.onclick = () => {
+                        colorContainer.querySelectorAll('.color-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        state.cor = c.name;
+                        updateLink();
+                    };
+                    colorContainer.appendChild(btn);
+                });
+                colorGroup.appendChild(colorContainer);
+                container.appendChild(colorGroup);
+
+                // 2. Other Options Helper
+                const createTextOptions = (label, key, options) => {
+                    const group = document.createElement('div');
+                    group.className = 'option-group';
+                    group.innerHTML = `<span class="option-label">${label}</span>`;
+                    const optContainer = document.createElement('div');
+                    optContainer.className = 'text-options';
+                    
+                    options.forEach((opt, index) => {
+                        const btn = document.createElement('button');
+                        btn.className = `text-btn ${index === 0 ? 'active' : ''}`;
+                        btn.innerText = opt;
+                        btn.onclick = () => {
+                             optContainer.querySelectorAll('.text-btn').forEach(b => b.classList.remove('active'));
+                             btn.classList.add('active');
+                             state[key] = opt;
+                             updateLink();
+                        };
+                        optContainer.appendChild(btn);
+                    });
+                    group.appendChild(optContainer);
+                    container.appendChild(group);
+                };
+
+                createTextOptions('Alça', 'alca', config.alca);
+                createTextOptions('Fecho', 'fecho', config.fecho);
+                createTextOptions('Base', 'base', config.base);
+
+                // Insert before the link
+                item.insertBefore(container, link);
+                
+                // Initial update
+                updateLink();
+            });
+        });
+    </script>
 </body>
 </html>
