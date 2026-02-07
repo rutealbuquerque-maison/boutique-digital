@@ -92,7 +92,7 @@
 
         /* Slide 1: Hero */
         #hero {
-            background: linear-gradient(var(--overlay-dark), var(--overlay-dark)), url('assets/hero-bag.jpg') center/cover no-repeat;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('assets/modelos/Gisele1.png') center/cover no-repeat;
             color: var(--off-white);
             text-align: center;
         }
@@ -138,16 +138,8 @@
 
         .manifesto-img {
             height: 100%;
-            background: url('assets/story-bag.jpg') center/cover no-repeat;
+            background: url('assets/modelos/Ariel1.png') center/cover no-repeat; /* Updated Image */
             position: relative;
-        }
-
-        .manifesto-img::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to right, rgba(0,0,0,0), rgba(252,252,252,1)); 
-            /* Fade to white on right edge for desktop */
         }
 
         .manifesto-content {
@@ -156,6 +148,8 @@
             flex-direction: column;
             justify-content: center;
             max-width: 600px;
+            background: white;
+            z-index: 1;
         }
 
         .manifesto-content h2 {
@@ -172,90 +166,230 @@
             text-align: justify;
         }
 
-        /* Slide 3: Drop */
-        #drop {
-            background-color: #f4f4f4; /* Subtle contrast */
-            padding: 0;
-            /* Allow internal scrolling if content overflows */
-            align-items: stretch; 
+        /* --- Bag Slides (Stories Style) --- */
+        .bag-slide {
+            position: relative;
+            background-color: #000;
         }
 
-        .drop-header {
-            text-align: center;
-            padding: 2rem 1rem 1rem;
-            flex-shrink: 0;
-        }
-
-        .drop-header h2 {
-            font-size: 2.5rem;
-            color: var(--emerald);
-        }
-
-        .drop-scroll-wrapper {
-            flex-grow: 1;
-            overflow-y: auto; /* Allow vertical scroll within this section */
-            padding: 1rem 2rem 4rem;
-            display: flex;
-            justify-content: center;
-        }
-
-        .drop-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr); /* 4 columns on large screens */
-            gap: 20px;
-            max-width: 1400px;
+        /* Background Model (Vogue) */
+        .bag-bg {
+            position: absolute;
+            inset: 0;
             width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            transition: all 0.5s ease;
         }
 
-        .drop-item {
-            background: white;
-            padding: 20px;
-            border: 1px solid transparent;
-            transition: all 0.4s ease;
-            display: flex;
-            flex-direction: column;
-            height: fit-content;
+        /* Desktop: Cinema Mode (Blur BG) */
+        @media (min-width: 769px) {
+            .bag-bg {
+                filter: blur(8px) brightness(0.6);
+                transform: scale(1.05); /* Avoid white edges from blur */
+            }
+            
+            .bag-container {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 100%;
+                width: 100%;
+                z-index: 2;
+                position: relative;
+            }
+
+            .luxury-card {
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(10px);
+                padding: 40px;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
+                max-width: 1000px;
+                width: 90%;
+                box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+                border: 1px solid rgba(255,255,255,0.5);
+                align-items: center;
+            }
+
+            .product-visual {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+            }
+
+            .product-img {
+                width: 100%;
+                max-width: 350px;
+                filter: drop-shadow(0 15px 25px rgba(0,0,0,0.15));
+                transition: transform 0.3s ease;
+            }
+            
+            .product-img:hover {
+                transform: scale(1.05) rotate(-2deg);
+            }
+
+            .product-details {
+                text-align: left;
+            }
+
+            .product-title {
+                font-size: 3rem;
+                color: var(--emerald);
+                margin-bottom: 10px;
+            }
+
+            .exclusivity-tag {
+                font-size: 0.9rem;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                color: var(--gold-champagne);
+                margin-bottom: 2rem;
+                display: block;
+            }
         }
 
-        .drop-item:hover {
-            border-color: var(--gold-champagne);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        /* Mobile: Stories Mode */
+        @media (max-width: 768px) {
+            .bag-bg {
+                filter: brightness(0.85); /* Slight dim for text readability */
+            }
+
+            .bag-container {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                z-index: 2;
+                background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
+                padding: 20px;
+            }
+
+            .luxury-card {
+                background: transparent;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                width: 100%;
+            }
+
+            .product-visual {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 100%;
+                pointer-events: none; /* Let touches pass through if needed */
+            }
+
+            .product-img {
+                width: 70%;
+                max-width: 300px;
+                filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+            }
+
+            .product-details {
+                margin-top: auto; /* Push to bottom */
+                padding-bottom: 20px;
+                width: 100%;
+            }
+
+            .product-title {
+                font-size: 2.5rem;
+                color: var(--off-white);
+                margin-bottom: 5px;
+                text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            }
+
+            .exclusivity-tag {
+                color: var(--gold-champagne);
+                font-size: 0.8rem;
+                margin-bottom: 1.5rem;
+                display: block;
+                text-shadow: 0 2px 5px rgba(0,0,0,0.8);
+            }
+            
+            /* Adjust customization colors for dark mobile bg */
+            .custom-options .option-label {
+                color: #ccc !important;
+            }
+            .text-btn {
+                color: #ddd !important;
+                border-color: #555 !important;
+            }
+            .text-btn.active {
+                background: var(--gold-champagne) !important;
+                color: var(--emerald) !important;
+                border-color: var(--gold-champagne) !important;
+            }
         }
 
-        .drop-item img {
-            width: 100%;
-            aspect-ratio: 1;
-            object-fit: contain;
-            margin-bottom: 15px;
-            background: #fafafa;
-        }
-
-        .drop-item h3 {
-            font-size: 1.2rem;
-            margin-bottom: 5px;
-            color: var(--emerald);
-        }
-
+        /* Shared Components */
         .reserve-link {
             display: block;
-            margin-top: 15px;
+            margin-top: 20px;
             text-align: center;
-            padding: 10px;
+            padding: 15px 0;
             background: var(--emerald);
             color: var(--gold-champagne);
             text-decoration: none;
-            font-size: 0.7rem;
+            font-size: 0.9rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             transition: 0.3s;
+            width: 100%;
+            border: 1px solid var(--gold-champagne);
         }
 
         .reserve-link:hover {
             background: var(--emerald-dark);
+            box-shadow: 0 0 15px rgba(197, 160, 89, 0.3);
         }
 
-        /* Slide 4: Attendance / Footer */
+        /* Customization Styles */
+        .custom-options {
+            margin-top: 15px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(113, 113, 113, 0.2);
+            width: 100%;
+        }
+        .option-group { margin-bottom: 15px; }
+        .option-label {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            color: #999;
+            display: block;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+        .color-options { display: flex; gap: 10px; justify-content: center; } /* Center on mobile default */
+        @media(min-width: 769px) { .color-options { justify-content: flex-start; } }
+
+        .color-btn {
+            width: 25px; height: 25px; border-radius: 50%; border: 1px solid #ddd; cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .color-btn.active { transform: scale(1.3); border: 2px solid var(--gold-champagne); }
+        
+        .text-options { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+        @media(min-width: 769px) { .text-options { justify-content: flex-start; } }
+
+        .text-btn {
+            font-size: 0.7rem; padding: 6px 12px; border: 1px solid #ccc; background: none; cursor: pointer; border-radius: 20px;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.2s;
+        }
+        .text-btn.active { background: var(--emerald); color: var(--gold-champagne); border-color: var(--emerald); }
+
+        /* Slide: Attendance / Footer */
         #attendance {
             background: var(--emerald);
             color: var(--off-white);
@@ -295,33 +429,6 @@
             letter-spacing: 1px;
         }
 
-        /* Customization Styles (Injected by Script) */
-        .custom-options {
-            margin-top: 15px;
-            border-top: 1px solid #eee;
-            padding-top: 10px;
-        }
-        .option-group { margin-bottom: 10px; }
-        .option-label {
-            font-size: 0.6rem;
-            text-transform: uppercase;
-            color: #999;
-            display: block;
-            margin-bottom: 5px;
-            letter-spacing: 1px;
-        }
-        .color-options { display: flex; gap: 8px; }
-        .color-btn {
-            width: 20px; height: 20px; border-radius: 50%; border: 1px solid #ddd; cursor: pointer;
-        }
-        .color-btn.active { transform: scale(1.2); border: 2px solid var(--gold-champagne); }
-        .text-options { display: flex; flex-wrap: wrap; gap: 5px; }
-        .text-btn {
-            font-size: 0.65rem; padding: 4px 10px; border: 1px solid #eee; background: none; cursor: pointer; border-radius: 15px;
-            font-family: 'Montserrat', sans-serif;
-        }
-        .text-btn.active { background: var(--emerald); color: var(--gold-champagne); border-color: var(--emerald); }
-
         /* Animations */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
@@ -332,52 +439,33 @@
             50% { opacity: 1; }
         }
 
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .drop-grid {
-                grid-template-columns: repeat(2, 1fr); /* 2x2 tablet */
-            }
-        }
-
+        /* Specific Mobile Tweaks */
         @media (max-width: 768px) {
             /* Mobile Manifesto */
             #manifesto {
                 display: flex;
                 flex-direction: column;
-                background: url('assets/story-bag.jpg') center/cover no-repeat; /* Background image for mobile */
+                background: url('assets/modelos/Ariel1.png') center/cover no-repeat;
                 position: relative;
             }
             #manifesto::before {
                 content: '';
                 position: absolute;
                 inset: 0;
-                background: rgba(255, 255, 255, 0.9); /* Strong overlay */
+                background: rgba(255, 255, 255, 0.85); /* Strong overlay */
             }
             .manifesto-content {
                 position: relative;
                 z-index: 1;
                 padding: 2rem;
                 text-align: center;
+                background: transparent;
+                height: 100%;
             }
-            .manifesto-img { display: none; } /* Hide the separate div */
+            .manifesto-img { display: none; } 
             .manifesto-content h2 { font-size: 2.2rem; }
-
-            /* Mobile Drop - Horizontal Scroll within Section */
-            .drop-scroll-wrapper {
-                justify-content: flex-start; /* Align left for scroll */
-                padding: 1rem;
-                overflow-x: auto; /* Horizontal scroll if we want carousel, or just vertical grid? */
-                /* Let's keep vertical grid for mobile but it scrolls within the section */
-            }
-            .drop-grid {
-                grid-template-columns: 1fr; /* Single column */
-                gap: 30px;
-                padding-bottom: 50px; /* Space for scroll */
-            }
             
-            /* Adjustments */
             .hero-logo { width: 220px; }
-            .section-title { font-size: 2rem; }
         }
     </style>
 </head>
@@ -401,61 +489,93 @@
                 <h2>O Luxo da Paciência</h2>
                 <p>Na Maison Rute Albuquerque, o tempo não é nosso inimigo, mas o nosso material mais precioso. Cada peça é tecida à mão, ponto a ponto, em um processo que honra a tradição milenar do fazer artesanal.</p>
                 <p>Nossas bolsas não são produzidas em série. Elas são gestadas. O resultado é uma obra de arte vestível, carregada de história e significado.</p>
-                <a href="#drop" class="btn" style="color: var(--emerald); border-color: var(--emerald); align-self: flex-start;">Ver Obras</a>
+                <a href="#atena" class="btn" style="color: var(--emerald); border-color: var(--emerald); align-self: center; margin-top: 20px;">Ver Obras</a>
             </div>
         </section>
 
-        <!-- Slide 3: Drop -->
-        <section id="drop">
-            <div class="drop-header">
-                <h2>O Drop</h2>
-                <p style="font-size: 0.8rem; letter-spacing: 1px; color: #999; margin-top: 5px;">Edição Limitada de Fevereiro</p>
-            </div>
-            <div class="drop-scroll-wrapper">
-                <div class="drop-grid">
-                    <!-- Bolsa 1 -->
-                    <div class="drop-item">
-                        <img src="assets/atena.png" alt="Bolsa Atena">
-                        <h3>Atena</h3>
-                        <p style="font-size: 0.7rem; color: #aaa; margin-bottom: 10px;">PEÇA ÚNICA 01/04</p>
-                        <!-- Script will inject options here -->
-                        <a href="https://wa.me/5511957688000" class="reserve-link" target="_blank">Reservar</a>
+        <!-- Slide 3: Atena -->
+        <section id="atena" class="bag-slide">
+            <img src="assets/modelos/Atena_7_1.png" class="bag-bg" alt="Modelo Atena">
+            <div class="bag-container">
+                <div class="luxury-card">
+                    <div class="product-visual">
+                        <img src="assets/produtos/Atena_7_2.png" class="product-img" alt="Bolsa Atena">
                     </div>
-                    <!-- Bolsa 2 -->
-                    <div class="drop-item">
-                        <img src="assets/afrodite.png" alt="Bolsa Afrodite">
-                        <h3>Afrodite</h3>
-                        <p style="font-size: 0.7rem; color: #aaa; margin-bottom: 10px;">PEÇA ÚNICA 02/04</p>
-                        <a href="https://wa.me/5511957688000" class="reserve-link" target="_blank">Reservar</a>
-                    </div>
-                    <!-- Bolsa 3 -->
-                    <div class="drop-item">
-                        <img src="assets/bali.png" alt="Bolsa Bali">
-                        <h3>Bali</h3>
-                        <p style="font-size: 0.7rem; color: #aaa; margin-bottom: 10px;">PEÇA ÚNICA 03/04</p>
-                        <a href="https://wa.me/5511957688000" class="reserve-link" target="_blank">Reservar</a>
-                    </div>
-                    <!-- Bolsa 4 -->
-                    <div class="drop-item">
-                        <img src="assets/elegance.png" alt="Bolsa Elegance">
-                        <h3>Elegance</h3>
-                        <p style="font-size: 0.7rem; color: #aaa; margin-bottom: 10px;">PEÇA ÚNICA 04/04</p>
-                        <a href="https://wa.me/5511957688000" class="reserve-link" target="_blank">Reservar</a>
+                    <div class="product-details bag-data">
+                        <h3 class="product-title">Atena</h3>
+                        <span class="exclusivity-tag">CRIAÇÃO ÚNICA &bull; HANDMADE</span>
+                        <p style="font-size: 0.8rem; margin-bottom: 20px; opacity: 0.8;">A sabedoria do feito à mão em cada ponto.</p>
+                        <!-- Options injected here -->
+                        <a href="#" class="reserve-link" target="_blank">Reservar</a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Slide 4: Attendance -->
+        <!-- Slide 4: Afrodite -->
+        <section id="afrodite" class="bag-slide">
+            <img src="assets/modelos/Afrodite_10_1.png" class="bag-bg" alt="Modelo Afrodite">
+            <div class="bag-container">
+                <div class="luxury-card">
+                    <div class="product-visual">
+                        <img src="assets/produtos/Afrodite_10_2.png" class="product-img" alt="Bolsa Afrodite">
+                    </div>
+                    <div class="product-details bag-data">
+                        <h3 class="product-title">Afrodite</h3>
+                        <span class="exclusivity-tag">SÉRIE LIMITADA &bull; AMOR EM FIOS</span>
+                        <p style="font-size: 0.8rem; margin-bottom: 20px; opacity: 0.8;">A beleza do amor materializada em fios.</p>
+                        <a href="#" class="reserve-link" target="_blank">Reservar</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 5: Bali -->
+        <section id="bali" class="bag-slide">
+            <img src="assets/modelos/Bali_6_1.png" class="bag-bg" alt="Modelo Bali">
+            <div class="bag-container">
+                <div class="luxury-card">
+                    <div class="product-visual">
+                        <img src="assets/produtos/Bali_6_2.png" class="product-img" alt="Bolsa Bali">
+                    </div>
+                    <div class="product-details bag-data">
+                        <h3 class="product-title">Bali</h3>
+                        <span class="exclusivity-tag">EDIÇÃO TROPICAL &bull; EXCLUSIVA</span>
+                        <p style="font-size: 0.8rem; margin-bottom: 20px; opacity: 0.8;">A leveza tropical com a sofisticação urbana.</p>
+                        <a href="#" class="reserve-link" target="_blank">Reservar</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 6: Elegance -->
+        <section id="elegance" class="bag-slide">
+            <img src="assets/modelos/Elegance_3_1.png" class="bag-bg" alt="Modelo Elegance">
+            <div class="bag-container">
+                <div class="luxury-card">
+                    <div class="product-visual">
+                        <img src="assets/produtos/Elegance_3_2.png" class="product-img" alt="Bolsa Elegance">
+                    </div>
+                    <div class="product-details bag-data">
+                        <h3 class="product-title">Elegance</h3>
+                        <span class="exclusivity-tag">DESIGN PURO &bull; ATEMPORAL</span>
+                        <p style="font-size: 0.8rem; margin-bottom: 20px; opacity: 0.8;">Minimalismo puro para ocasiões eternas.</p>
+                        <a href="#" class="reserve-link" target="_blank">Reservar</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 7: Attendance -->
         <section id="attendance">
             <img src="assets/logo-transp.png" alt="Logo" class="footer-logo">
             <h2 style="font-size: 2rem; margin-bottom: 1rem;">Atelier Digital</h2>
-            <p style="max-width: 500px; margin: 0 auto 3rem; opacity: 0.8;">Nosso atendimento é tão personalizado quanto nossas peças. Fale diretamente com a artesã para dúvidas e encomendas especiais.</p>
+            <p style="max-width: 500px; margin: 0 auto 3rem; opacity: 0.8;">Nosso atendimento é tão personalizado quanto nossas peças. Fale diretamente com a artesã.</p>
             
             <a href="https://wa.me/5511957688000" class="whatsapp-cta" target="_blank">Falar no WhatsApp</a>
             
             <footer>
-                <p>&copy; 2026 MAISON RUTE ALBUQUERQUE. TODOS OS DIREITOS RESERVADOS.</p>
+                <p>&copy; 2026 MAISON RUTE ALBUQUERQUE.</p>
             </footer>
         </section>
 
@@ -476,14 +596,14 @@
                 base: ['Total Crochê', 'Base em Couro']
             };
 
-            const items = document.querySelectorAll('.drop-item');
+            const bags = document.querySelectorAll('.bag-data');
 
-            items.forEach(item => {
-                const bagNameElement = item.querySelector('h3');
+            bags.forEach(bag => {
+                const bagNameElement = bag.querySelector('.product-title');
                 if (!bagNameElement) return;
                 
                 const bagName = bagNameElement.innerText;
-                const link = item.querySelector('.reserve-link');
+                const link = bag.querySelector('.reserve-link');
                 
                 // Create container
                 const container = document.createElement('div');
@@ -557,7 +677,7 @@
                 createTextOptions('Base', 'base', config.base);
 
                 // Insert before the link
-                item.insertBefore(container, link);
+                bag.insertBefore(container, link);
                 
                 // Initial update
                 updateLink();
